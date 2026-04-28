@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+print(f'DEBUG: {DEBUG}')
 if DEBUG:
     # Тут postgres как и положено
     DATABASES = {
