@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import UserRegisterForm, UserUpdateForm
+from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 from .mixins import IsSelfUserMixin
 
 
@@ -48,7 +48,7 @@ class UserDeleteView(IsSelfUserMixin, generic.DeleteView):
 
 
 class UserLoginView(generic.FormView):
-    form_class = AuthenticationForm
+    form_class = UserLoginForm
     template_name = 'users/login.html'
     success_url = reverse_lazy('home')
 

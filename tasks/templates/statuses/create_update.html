@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="display-5 mb-4">
+    {% block title %}{{ view.object|yesno:"Изменить статус,Создать статус" }}{% endblock %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {% include "includes/form_field.html" with field=form.name %}
+
+    <button class="btn btn-primary">
+      {{ view.object|yesno:"Изменить,Создать" }}
+    </button>
+  </form>
+</div>
+{% endblock %}

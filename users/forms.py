@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 
@@ -48,3 +48,11 @@ class UserUpdateForm(forms.ModelForm):
                 Только буквы, цифры и символы @/./+/-/_.',
             '''
         }
+
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].label = 'Имя пользователя'
+        self.fields['password'].label = 'Пароль'
