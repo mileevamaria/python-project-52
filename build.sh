@@ -7,4 +7,4 @@ source $HOME/.local/bin/env
 # команду установки зависимостей, сборки статики, применения миграций и другие
 
 mkdir logs
-make install && make render-start
+make install
