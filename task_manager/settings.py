@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv('DEBUG', 0))
+DEBUG = bool(int(os.getenv('DEBUG', 0)))
 
 ALLOWED_HOSTS = ['webserver', 'localhost', '.onrender.com']
 
@@ -78,7 +78,6 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-print(f'DEBUG: {DEBUG}')
 if DEBUG:
     # Тут postgres как и положено
     DATABASES = {
