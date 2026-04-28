@@ -7,17 +7,18 @@
   <form method="post">
     {% csrf_token %}
 
-    <div class="mb-3">
-      <label class="form-label">Имя пользователя</label>
-      <input type="text" name="username" id="id_username" class="form-control" placeholder="Имя пользователя" required>
-    </div>
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger alert-dismissible fade show">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
 
-    <div class="mb-3">
-      <label class="form-label">Пароль</label>
-      <input type="password" name="password" id="id_password" class="form-control" placeholder="Пароль" required>
-    </div>
+    {% include "includes/form_field.html" with field=form.username %}
+    {% include "includes/form_field.html" with field=form.password %}
 
-    <button type="submit" class="btn btn-primary">Войти</button>
+    <button type="submit" class="btn btn-primary">
+      Войти
+    </button>
   </form>
 </div>
 {% endblock %}
