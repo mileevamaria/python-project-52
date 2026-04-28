@@ -1,0 +1,42 @@
+{% extends 'bootstrap.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block bootstrap5_content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Менеджер задач</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Пользователи</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Статусы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Метки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Задачи</a> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Вход</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Регистрация</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+  {% block content %}{% endblock %}
+</div>
+
+{% endblock %}
