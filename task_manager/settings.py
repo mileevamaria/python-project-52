@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'task_manager',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,7 @@ LOGGING = {
         "level": "INFO",
     },
 }
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/users/'
+LOGOUT_REDIRECT_URL = '/login/'

@@ -1,9 +1,7 @@
+from django.views import View
 from django.shortcuts import render
 
 
-def index(request):
-    return render(
-        request,
-        'index.html',
-        context={},
-    )
+class HomeView(View):
+    def get(self, request):
+        return render(request, 'index.html')

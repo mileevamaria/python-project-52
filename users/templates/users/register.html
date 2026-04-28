@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="display-5 mb-4">{% block title %}Регистрация{% endblock %}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Общие ошибки -->
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger alert-dismissible fade show">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    {% include "includes/form_field.html" with field=form.first_name %}
+    {% include "includes/form_field.html" with field=form.last_name %}
+    {% include "includes/form_field.html" with field=form.username %}
+    {% include "includes/form_field.html" with field=form.password1 %}
+    {% include "includes/form_field.html" with field=form.password2 %}
+
+    <button type="submit" class="btn btn-primary">
+      Зарегистрировать
+    </button>
+  </form>
+</div>
+{% endblock %}

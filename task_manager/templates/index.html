@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-{% block title %}Менеджер задач{% endblock %}
-
 {% block content %}
+<div class="container mt-4">
+  <div class="p-5 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-5">
+      <h1 class="display-5">{% block title %}Привет от Хекслета!{% endblock %}</h1>
+      <p class="col-md-8 fs-5">
+        Практические курсы по программированию
+      </p>
+      <hr>
+      <a href="https://hexlet.io" class="btn btn-primary btn-lg">
+        Узнать больше
+      </a>
+    </div>
+  </div>    
+</div>
 {% endblock %}
