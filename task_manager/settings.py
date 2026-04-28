@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG', 0))
 
-ALLOWED_HOSTS = ['webserver', 'localhost']
+ALLOWED_HOSTS = ['webserver', 'localhost', '.onrender.com']
 
 
 # Application definition
@@ -78,10 +78,19 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.parse(os.getenv('DATABASE_URL', ''))
-}
-
+if DEBUG:
+    # Тут postgres как и положено
+    DATABASES = {
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL', ''))
+    }
+else:
+    # !!! Render.com не позволяет иметь более 1 инстанса БД, поэтому SQLite3
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -118,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Logger (console and file)
 LOGGING = {

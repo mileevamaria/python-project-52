@@ -8,9 +8,9 @@ build:
 	./build.sh
 
 dev:
-	uv run manage.py runserver
+	make collectstatic && make migrate &&uv run manage.py runserver
 render-start:
-	gunicorn task_manager.wsgi
+	make collectstatic && make migrate && gunicorn task_manager.wsgi
 migrate:
 	python manage.py migrate
 makemigrations:
