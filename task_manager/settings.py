@@ -138,12 +138,6 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "standard",
         },
-
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": "logs/app.log",
-            "formatter": "standard",
-        },
     },
 
     "root": {
