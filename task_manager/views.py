@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
+from django.views.decorators.http import require_GET
 
 
 class HomeView(View):
@@ -8,6 +9,7 @@ class HomeView(View):
         return render(request, 'index.html')
 
 
+@require_GET
 def test_error(request):
     """Trigger a test error for Rollbar."""
     a = None

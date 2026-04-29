@@ -17,6 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+def str_to_bool(value):
+    return str(value).lower() in ('true', '1', 'True')
+
 DEBUG = bool(int(os.getenv('DEBUG', 0)))
 
 ALLOWED_HOSTS = ['webserver', 'localhost', '.onrender.com']
