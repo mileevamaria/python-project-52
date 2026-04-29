@@ -7,6 +7,7 @@ from django_filters.views import FilterView
 
 from . import flashes
 from .filters import TaskFilter
+from .forms import TaskForm
 from .mixins import UserAuthorTaskMixin
 from .models import Label, Status, Task
 
@@ -65,7 +66,7 @@ class TaskListView(LoginRequiredMixin, FilterView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = ['name', 'description', 'status', 'executor', 'labels']
+    form_class = TaskForm
     template_name = 'tasks/form.html'
     success_url = SUCCESS_URL_TASK
 
@@ -77,7 +78,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
-    fields = ['name', 'description', 'status', 'executor', 'labels']
+    form_class = TaskForm
     template_name = 'tasks/form.html'
     success_url = SUCCESS_URL_TASK
 
