@@ -13,8 +13,8 @@
       </div>
     {% endif %}
 
-    {% include "includes/form_field.html" with field=form.username %}
-    {% include "includes/form_field.html" with field=form.password %}
+    {% include "includes/form_field.html" with field=form.username type="input" %}
+    {% include "includes/form_field.html" with field=form.password type="password" %}
 
     <button type="submit" class="btn btn-primary">
       Войти

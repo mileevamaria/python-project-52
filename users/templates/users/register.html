@@ -14,11 +14,11 @@
       </div>
     {% endif %}
 
-    {% include "includes/form_field.html" with field=form.first_name %}
-    {% include "includes/form_field.html" with field=form.last_name %}
-    {% include "includes/form_field.html" with field=form.username %}
-    {% include "includes/form_field.html" with field=form.password1 %}
-    {% include "includes/form_field.html" with field=form.password2 %}
+    {% include "includes/form_field.html" with field=form.first_name type="input"%}
+    {% include "includes/form_field.html" with field=form.last_name type="input"%}
+    {% include "includes/form_field.html" with field=form.username type="input"%}
+    {% include "includes/form_field.html" with field=form.password1 type="password"%}
+    {% include "includes/form_field.html" with field=form.password2 type="password"%}
 
     <button type="submit" class="btn btn-primary">
       Зарегистрировать

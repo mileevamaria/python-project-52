@@ -8,7 +8,7 @@
 
   <form method="post">
     {% csrf_token %}
-    {% include "includes/form_field.html" with field=form.name %}
+    {% include "includes/form_field.html" with field=form.name type="input" %}
 
     <button class="btn btn-primary">
       {{ view.object|yesno:"Изменить,Создать" }}

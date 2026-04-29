@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <h1 class="display-5 mb-4">
+    {% block title %}{{ view.object|yesno:"Изменить задачу,Создать задачу" }}{% endblock %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    {% include "includes/form_field.html" with field=form.name type="input"%}
+    {% include "includes/form_field.html" with field=form.description type="textarea"%}
+    {% include "includes/form_field.html" with field=form.status type="select"%}
+    {% include "includes/form_field.html" with field=form.executor type="select"%}
+
+    <button class="btn btn-primary">
+      {{ view.object|yesno:"Изменить,Создать" }}
+    </button>
+
+  </form>
+</div>
+{% endblock %}

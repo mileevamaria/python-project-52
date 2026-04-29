@@ -1,16 +1,59 @@
 <div class="mb-3">
-  <label class="form-label" for="{{ field.id_for_label }}">
+
+  <label for="{{ field.id_for_label }}" class="form-label">
     {{ field.label }}
   </label>
 
-  <input
-    type="{{ field.field.widget.input_type }}"
-    name="{{ field.name }}"
-    id="{{ field.id_for_label }}"
-    class="form-control {% if field.errors %}is-invalid{% endif %}"
-    value="{{ field.value|default_if_none:'' }}"
-    placeholder="{{ field.label }}"
-  >
+  {% if type == "textarea" %}
+    <textarea
+      name="{{ field.name }}"
+      id="{{ field.id_for_label }}"
+      class="form-control {% if field.errors %}is-invalid{% endif %}"
+      placeholder="{{ field.label }}"
+      rows="5"
+    >{{ field.value|default_if_none:'' }}</textarea>
+
+  {% elif type == "multiselect" %}
+    <select
+      name="{{ field.name }}"
+      id="{{ field.id_for_label }}"
+      class="form-select {% if field.errors %}is-invalid{% endif %}"
+      multiple
+    >
+      {% for value, label in field.field.choices %}
+        <option value="{{ value }}"
+          {% if value|stringformat:"s" in field.value|stringformat:"s" %}selected{% endif %}
+        >
+          {{ label }}
+        </option>
+      {% endfor %}
+    </select>
+
+  {% elif type == "select" %}
+    <select
+      name="{{ field.name }}"
+      id="{{ field.id_for_label }}"
+      class="form-select {% if field.errors %}is-invalid{% endif %}"
+    >
+      {% for value, label in field.field.choices %}
+        <option value="{{ value }}"
+          {% if value|stringformat:"s" == field.value|stringformat:"s" %}selected{% endif %}
+        >
+          {{ label }}
+        </option>
+      {% endfor %}
+    </select>
+
+  {% else %}
+    <input
+      type="{{ field.field.widget.input_type }}"
+      name="{{ field.name }}"
+      id="{{ field.id_for_label }}"
+      class="form-control {% if field.errors %}is-invalid{% endif %}"
+      value="{{ field.value|default_if_none:'' }}"
+      placeholder="{{ field.label }}"
+    >
+  {% endif %}
 
   {% if field.help_text %}
     <div class="form-text">
@@ -19,8 +62,9 @@
   {% endif %}
 
   {% if field.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {{ field.errors.0 }}
     </div>
   {% endif %}
+
 </div>

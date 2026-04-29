@@ -43,6 +43,7 @@ class UserDeleteView(IsSelfUserMixin, generic.DeleteView):
     success_url = reverse_lazy('users:list')
 
     def form_valid(self, form):
+        # TODO: удалить пользователя только если он не является исполнителем или автором задач
         messages.success(self.request, 'Пользователь успешно удален')
         return super().form_valid(form)
 

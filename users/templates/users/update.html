@@ -12,9 +12,9 @@
       </div>
     {% endif %}
 
-    {% include "includes/form_field.html" with field=form.first_name %}
-    {% include "includes/form_field.html" with field=form.last_name %}
-    {% include "includes/form_field.html" with field=form.username %}
+    {% include "includes/form_field.html" with field=form.first_name type="input"%}
+    {% include "includes/form_field.html" with field=form.last_name type="input"%}
+    {% include "includes/form_field.html" with field=form.username type="input"%}
 
     <button type="submit" class="btn btn-primary">
       Изменить
