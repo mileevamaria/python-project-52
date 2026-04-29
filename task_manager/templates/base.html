@@ -20,7 +20,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'tasks:status_list' %}">Статусы</a>
         </li>
-        
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'tasks:label_list' %}">Метки</a>
         </li>
@@ -51,12 +51,18 @@
         {% endif %}
       </ul>
     </div>
-    
+
   </div>
 </nav>
 
 <div class="container min-vh-100">
-  {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{% if message.tags == 'error' %}alert-danger
+      {% else %}alert-{{ message.tags }}
+      {% endif %}" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
   {% block content %}{% endblock %}
 </div>
 
