@@ -5,7 +5,7 @@ lint:
 test:
 	uv run python3 manage.py test
 test-coverage:
-	uv run coverage run manage.py test && coverage xml
+	uv run python3 -m coverage run manage.py test && uv run python3 -m coverage xml
 build:
 	./build.sh
 

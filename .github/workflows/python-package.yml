@@ -25,11 +25,6 @@ jobs:
     - name: Run linter
       run: |
         make lint
-
-    - name: Debug env
-      run: echo $SECRET_KEY
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
     
     - name: Run test coverage
       run: |
