@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 from .mixins import IsSelfUserMixin
+from .models import User
 
 
 class UserListView(generic.ListView):

@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .mixins import UserAuthorTaskMixin
-from .models import Status, Task
+from .models import Label, Status, Task
 
 
 class StatusListView(LoginRequiredMixin, generic.ListView):
@@ -17,7 +17,7 @@ class StatusListView(LoginRequiredMixin, generic.ListView):
 class StatusCreateView(LoginRequiredMixin, generic.CreateView):
     model = Status
     fields = ['name']
-    template_name = 'statuses/create_update.html'
+    template_name = 'statuses/form.html'
     success_url = reverse_lazy('tasks:status_list')
 
     def form_valid(self, form):
@@ -28,7 +28,7 @@ class StatusCreateView(LoginRequiredMixin, generic.CreateView):
 class StatusUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Status
     fields = ['name']
-    template_name = 'statuses/create_update.html'
+    template_name = 'statuses/form.html'
     success_url = reverse_lazy('tasks:status_list')
 
     def form_valid(self, form):
@@ -56,7 +56,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     fields = ['name', 'description', 'status', 'executor']
-    template_name = 'tasks/create_update.html'
+    template_name = 'tasks/form.html'
     success_url = reverse_lazy('tasks:task_list')
 
     def form_valid(self, form):
@@ -68,7 +68,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     fields = ['name', 'description', 'status', 'executor']
-    template_name = 'tasks/create_update.html'
+    template_name = 'tasks/form.html'
     success_url = reverse_lazy('tasks:task_list')
 
     def form_valid(self, form):
@@ -90,5 +90,52 @@ class TaskDeleteView(
     success_url = reverse_lazy('tasks:task_list')
 
     def post(self, request, *args, **kwargs):
-        messages.success(request, "Задача успешно удалена")
+        messages.success(request, 'Задача успешно удалена')
+        return super().post(request, *args, **kwargs)
+
+
+class LabelListView(LoginRequiredMixin, generic.ListView):
+    model = Label
+    template_name = 'labels/list.html'
+    context_object_name = 'labels'
+
+
+class LabelCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Label
+    fields = ['name']
+    template_name = 'labels/form.html'
+    success_url = reverse_lazy('tasks:label_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Метка успешно создана')
+        return super().form_valid(form)
+
+
+class LabelUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Label
+    fields = ['name']
+    template_name = 'labels/form.html'
+    success_url = reverse_lazy('tasks:label_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Метка успешно изменена')
+        return super().form_valid(form)
+
+
+class LabelDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Label
+    template_name = 'labels/delete.html'
+    success_url = reverse_lazy('tasks:label_list')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.tasks.exists():
+            messages.error(
+                request, 
+                'Невозможно удалить метку, потому что она используется',
+            )
+            return redirect('tasks:label_list')
+
+        messages.success(request, 'Метка успешно удалена')
         return super().post(request, *args, **kwargs)

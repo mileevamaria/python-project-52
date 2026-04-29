@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
+
+from users.models import User
 
 
 class Status(models.Model):
@@ -20,6 +21,26 @@ class Status(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Label(models.Model):
+    name = models.CharField(
+        verbose_name='Имя',
+        max_length=100,
+        unique=True,
+        error_messages={
+            'unique': 'Метка с таким именем уже существует',
+        }
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Метка'
+        verbose_name_plural = 'Метки'
 
 
 class Task(models.Model):
@@ -50,6 +71,12 @@ class Task(models.Model):
         blank=True,
         related_name='tasks',
         verbose_name='Исполнитель'
+    )
+    labels = models.ManyToManyField(
+        Label,
+        blank=True,
+        related_name='tasks',
+        verbose_name='Метки',
     )
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name='Дата создания')

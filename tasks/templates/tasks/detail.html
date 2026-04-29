@@ -6,20 +6,14 @@
   <h1 class="display-5 mb-4">{% block title %}Просмотр задачи{% endblock %}</h1>
 
   <div class="card">
-
-    <!-- Заголовок -->
     <div class="card-header bg-secondary text-white py-2">
       <p class="display-6 mb-0">{{ task.name }}</p>
     </div>
 
     <div class="card-body">
-
-      <!-- Описание -->
       <p class="mb-3">{{ task.description }}</p>
-
       <hr>
 
-      <!-- Key / Value -->
       <div class="row mb-2">
         <div class="col-3">Автор</div>
         <div class="col-9">{{ task.author }}</div>
@@ -59,7 +53,6 @@
         </div>
       </div>
 
-      <!-- CRUD ссылки -->
       <a href="{% url 'tasks:task_update' task.id %}" class="d-block">
         Изменить
       </a>

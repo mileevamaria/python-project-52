@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <h1 class="display-5 mb-4">{% block title %}Метки{% endblock %}</h1>
+
+  <a href="{% url 'tasks:label_create' %}" class="btn btn-primary mb-3">
+    Создать метку
+  </a>
+
+  <table class="table table-striped">
+    <thead class="fw-normal">
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Дата создания</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for label in labels %}
+        <tr>
+          <td>{{ label.id }}</td>
+          <td>{{ label.name }}</td>
+          <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
+          <td>
+            <a href="{% url 'tasks:label_update' label.id %}">Изменить</a><br>
+            <a href="{% url 'tasks:label_delete' label.id %}">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}

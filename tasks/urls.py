@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import include, path
+
 from . import views
 
 app_name = 'tasks'
@@ -31,6 +32,20 @@ urlpatterns = [
             '<int:pk>/delete/',
             views.TaskDeleteView.as_view(),
             name='task_delete',
+        ),
+    ])),
+    path('labels/', include([
+        path('', views.LabelListView.as_view(), name='label_list'),
+        path('create/', views.LabelCreateView.as_view(), name='label_create'),
+        path(
+            '<int:pk>/update/',
+            views.LabelUpdateView.as_view(),
+            name='label_update',
+        ),
+        path(
+            '<int:pk>/delete/', 
+            views.LabelDeleteView.as_view(), 
+            name='label_delete',
         ),
     ])),
 ]
