@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from .models import User
 
+FIELD_USERNAME__NAME = 'Имя пользователя'
+
 
 class UserRegisterForm(UserCreationForm):
     class Meta:
@@ -13,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
-            'username': 'Имя пользователя',
+            'username': FIELD_USERNAME__NAME,
         }
         help_texts = {
             'username': '''
@@ -41,7 +43,7 @@ class UserUpdateForm(forms.ModelForm):
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
-            'username': 'Имя пользователя',
+            'username': FIELD_USERNAME__NAME,
         }
         help_texts = {
             'username': '''
@@ -55,5 +57,5 @@ class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['username'].label = 'Имя пользователя'
+        self.fields['username'].label = FIELD_USERNAME__NAME
         self.fields['password'].label = 'Пароль'

@@ -1,4 +1,5 @@
 import django_filters
+from django import forms
 
 from .models import Label, Task
 
@@ -10,7 +11,8 @@ class TaskFilter(django_filters.FilterSet):
     )
     self_tasks = django_filters.BooleanFilter(
         method='filter_self_tasks',
-        label='Только свои задачи'
+        label='Только свои задачи',
+        widget=forms.CheckboxInput()
     )
 
     class Meta:

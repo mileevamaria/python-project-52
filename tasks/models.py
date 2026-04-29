@@ -2,18 +2,23 @@ from django.db import models
 
 from users.models import User
 
+FIELD_NAME = {
+    'name': 'Имя',
+    'created_at': 'Дата создания',
+}
+
 
 class Status(models.Model):
     name = models.CharField(
         max_length=100, 
         unique=True, 
-        verbose_name='Имя',
+        verbose_name=FIELD_NAME['name'],
         error_messages={
             'unique': 'Статус с таким названием уже существует',
         }
     )
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name='Дата создания')
+        auto_now_add=True, verbose_name=FIELD_NAME['created_at'])
 
     class Meta:
         verbose_name = 'Статус'
@@ -25,7 +30,7 @@ class Status(models.Model):
 
 class Label(models.Model):
     name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=FIELD_NAME['name'],
         max_length=100,
         unique=True,
         error_messages={
@@ -33,7 +38,7 @@ class Label(models.Model):
         }
     )
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name='Дата создания')
+        auto_now_add=True, verbose_name=FIELD_NAME['created_at'])
 
     def __str__(self):
         return self.name
@@ -45,7 +50,7 @@ class Label(models.Model):
 
 class Task(models.Model):
     name = models.CharField(
-        'Имя',
+        verbose_name=FIELD_NAME['name'],
         max_length=255,
         unique=True,
         error_messages={
@@ -79,7 +84,7 @@ class Task(models.Model):
         verbose_name='Метки',
     )
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name='Дата создания')
+        auto_now_add=True, verbose_name=FIELD_NAME['created_at'])
     
     class Meta:
         verbose_name = 'Задача'

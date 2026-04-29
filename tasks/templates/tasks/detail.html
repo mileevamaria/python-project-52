@@ -42,13 +42,13 @@
         <div class="col-3">Метки</div>
         <div class="col-9">
           {% if task.labels.all %}
-            <ul class="mb-0 ps-3">
-              {% for label in task.labels.all %}
-                <li>{{ label.name }}</li>
-              {% endfor %}
-            </ul>
+          <ul class="mb-0 ps-3">
+            {% for label in task.labels.all %}
+            <li>{{ label.name }}</li>
+            {% endfor %}
+          </ul>
           {% else %}
-            —
+          —
           {% endif %}
         </div>
       </div>
