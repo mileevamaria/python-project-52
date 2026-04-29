@@ -27,7 +27,6 @@ class UserTests(TestCase):
             'password1': 'strongpass123',
             'password2': 'strongpass123',
         })
-
         self.assertEqual(response.status_code, 302)
         self.assertTrue(User.objects.filter(username='newuser').exists())
 
@@ -40,9 +39,7 @@ class UserTests(TestCase):
                 'last_name': 'Name',
             }
         )
-
         self.assertEqual(response.status_code, 302)
-
         self.user.refresh_from_db()
         self.assertEqual(self.user.username, 'updated')
 
@@ -50,7 +47,6 @@ class UserTests(TestCase):
         response = self.client.post(
             reverse('users:delete', args=[self.user.id])
         )
-
         self.assertEqual(response.status_code, 302)
         self.assertFalse(User.objects.filter(id=self.user.id).exists())
 
@@ -68,7 +64,6 @@ class AuthTests(TestCase):
             'username': 'user',
             'password': 'pass123'
         })
-
         self.assertEqual(response.status_code, 302)
 
     def test_login_fail(self):
@@ -76,11 +71,9 @@ class AuthTests(TestCase):
             'username': 'user',
             'password': 'wrong'
         })
-
         self.assertEqual(response.status_code, 200)
 
     def test_logout(self):
         self.client.login(username='user', password='pass123')
-
         response = self.client.post(reverse('users:logout'))
         self.assertEqual(response.status_code, 302)

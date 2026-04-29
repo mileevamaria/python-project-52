@@ -4,6 +4,8 @@ lint:
 	uv run ruff check task_manager
 test:
 	uv run python3 manage.py test
+test-coverage:
+	uv run coverage run manage.py test && coverage xml
 build:
 	./build.sh
 
