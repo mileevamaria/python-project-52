@@ -27,6 +27,10 @@ class UserRegisterView(generic.CreateView):
     def form_valid(self, form):
         messages.success(self.request, flashes.USER_REGISTER)
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
 
 
 class UserUpdateView(IsSelfUserMixin, generic.UpdateView):
