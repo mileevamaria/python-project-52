@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 def str_to_bool(value):
     return str(value).lower() in ('true', '1', 'True')
 
-DEBUG = bool(int(os.getenv('DEBUG', 0)))
+DEBUG = str_to_bool(os.getenv('DEBUG', 0))
 
 ALLOWED_HOSTS = ['webserver', 'localhost', '.onrender.com']
 
