@@ -141,7 +141,7 @@ LOGGING = {
     },
 
     "root": {
-        "handlers": ["console", "file"],
+        "handlers": ["console"],
         "level": "INFO",
     },
 }
