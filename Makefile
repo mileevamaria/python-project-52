@@ -3,12 +3,12 @@ install:
 lint:
 	uv run ruff check task_manager
 test:
-	pytest
+	uv run python3 manage.py test
 build:
 	./build.sh
 
 dev:
-	uv run manage.py runserver
+	uv run python3 manage.py runserver
 render-start:
 	make collectstatic && make migrate && gunicorn task_manager.wsgi
 migrate:

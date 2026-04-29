@@ -20,7 +20,7 @@ class UserTests(TestCase):
         self.assertContains(response, self.user.username)
 
     def test_user_create(self):
-        response = self.client.post(reverse('users:create'), {
+        response = self.client.post(reverse('users:register'), {
             'username': 'newuser',
             'first_name': 'Test',
             'last_name': 'User',
@@ -64,7 +64,7 @@ class AuthTests(TestCase):
         )
 
     def test_login(self):
-        response = self.client.post(reverse('login'), {
+        response = self.client.post(reverse('users:login'), {
             'username': 'user',
             'password': 'pass123'
         })
@@ -72,7 +72,7 @@ class AuthTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_login_fail(self):
-        response = self.client.post(reverse('login'), {
+        response = self.client.post(reverse('users:login'), {
             'username': 'user',
             'password': 'wrong'
         })
@@ -82,5 +82,5 @@ class AuthTests(TestCase):
     def test_logout(self):
         self.client.login(username='user', password='pass123')
 
-        response = self.client.post(reverse('logout'))
+        response = self.client.post(reverse('users:logout'))
         self.assertEqual(response.status_code, 302)
