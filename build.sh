@@ -7,5 +7,4 @@ source $HOME/.local/bin/env
 # команду установки зависимостей, сборки статики, применения миграций и другие
 
 mkdir logs
-rm -rf .venv
 make install
