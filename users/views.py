@@ -6,7 +6,6 @@ from django.views import generic
 
 from . import flashes
 from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm
-from .mixins import IsSelfUserMixin
 from .models import User
 
 ROUTE_LIST = 'users:list'
@@ -33,27 +32,38 @@ class UserRegisterView(generic.CreateView):
         return super().form_invalid(form)
 
 
-class UserUpdateView(IsSelfUserMixin, generic.UpdateView):
+class UserUpdateView(generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'users/update.html'
     success_url = reverse_lazy(ROUTE_LIST)
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_object() != request.user:
+            messages.error(request, flashes.USER_FORBIDDEN)
+            return redirect(ROUTE_LIST)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         messages.success(self.request, flashes.USER_UPDATE)
         return super().form_valid(form)
 
 
-class UserDeleteView(IsSelfUserMixin, generic.DeleteView):
+class UserDeleteView(generic.DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy(ROUTE_LIST)
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_object() != request.user:
+            messages.error(request, flashes.USER_FORBIDDEN)
+            return redirect(ROUTE_LIST)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         if self.request.user.created_tasks.exists():
             messages.error(self.request, flashes.USER_DELETE_ERROR)
             return redirect(ROUTE_LIST)
-
         messages.success(self.request, flashes.USER_DELETE)
         return super().form_valid(form)
 
