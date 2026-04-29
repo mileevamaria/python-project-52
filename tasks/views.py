@@ -3,7 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django_filters.views import FilterView
 
+from .filters import TaskFilter
 from .mixins import UserAuthorTaskMixin
 from .models import Label, Status, Task
 
@@ -47,15 +49,16 @@ class StatusDeleteView(LoginRequiredMixin, generic.DeleteView):
         return super().post(request, *args, **kwargs)
 
 
-class TaskListView(LoginRequiredMixin, generic.ListView):
+class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/list.html'
     context_object_name = 'tasks'
+    filterset_class = TaskFilter
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = ['name', 'description', 'status', 'executor']
+    fields = ['name', 'description', 'status', 'executor', 'labels']
     template_name = 'tasks/form.html'
     success_url = reverse_lazy('tasks:task_list')
 
@@ -67,7 +70,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
-    fields = ['name', 'description', 'status', 'executor']
+    fields = ['name', 'description', 'status', 'executor', 'labels']
     template_name = 'tasks/form.html'
     success_url = reverse_lazy('tasks:task_list')
 
