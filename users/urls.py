@@ -7,9 +7,9 @@ app_name = 'users'
 urlpatterns = [
     path('users/', views.UserListView.as_view(), name='list'),
     path(
-        'users/register/', 
+        'users/create/', 
         views.UserRegisterView.as_view(), 
-        name='register',
+        name='create',
     ),
     path(
         'users/<int:pk>/update/', 

@@ -20,7 +20,7 @@ class UserTests(TestCase):
         self.assertContains(response, self.user.username)
 
     def test_user_create(self):
-        response = self.client.post(reverse('users:register'), {
+        response = self.client.post(reverse('users:create'), {
             'username': 'newuser',
             'first_name': 'Test',
             'last_name': 'User',
