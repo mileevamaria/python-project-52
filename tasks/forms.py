@@ -1,7 +1,8 @@
 from django import forms
 
-from .models import Task
 from users.models import User
+
+from .models import Task
 
 
 class TaskForm(forms.ModelForm):
