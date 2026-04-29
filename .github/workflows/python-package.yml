@@ -36,7 +36,7 @@ jobs:
       uses: SonarSource/sonarqube-scan-action@v7
       with:
         args: >
-          -Dsonar.projectKey=mileevamaria_python-project-50
+          -Dsonar.projectKey=mileevamaria_python-project-52
           -Dsonar.organization=mileevamaria
           -Dsonar.python.coverage.reportPaths=coverage.xml
       env:
