@@ -58,9 +58,10 @@
 <div class="container min-vh-100">
   {% if messages %}
   {% for message in messages %}
-  <div class="alert alert-{% if message.tags == 'error' %}alert-danger
-      {% else %}alert-{{ message.tags }}
-      {% endif %}" role="alert">{{ message }}</div>
+  <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}"
+    role="alert">
+    {{ message }}
+  </div>
   {% endfor %}
   {% endif %}
   {% block content %}{% endblock %}
