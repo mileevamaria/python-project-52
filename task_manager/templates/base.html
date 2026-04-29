@@ -56,12 +56,7 @@
 </nav>
 
 <div class="container min-vh-100">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}"
-    role="alert">{{ message }}</div>
-  {% endfor %}
-  {% endif %}
+  {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
   {% block content %}{% endblock %}
 </div>
 
